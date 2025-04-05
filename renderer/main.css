@@ -1,96 +1,159 @@
 /* main.css */
 
-/* Use full window height */
+/* 1. Color & typography variables */
+:root {
+  --bg: #121212;
+  --fg: #E0E0E0;
+  --accent: #BB86FC;
+  --fast-color: limegreen;    /* classic limegreen */
+  --slow-color: red;          /* classic red */
+  --box-bg: rgba(255, 255, 255, 0.05);
+  --font-base: 'SF Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'SF Mono', Menlo, Monaco, 'Courier New', monospace;
+  --transition: 0.3s ease;
+}
+
+/* 2. Global resets */
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-base);
+  overflow: hidden;
 }
 
-/* Basic body styling */
-body {
-  background: #000;
-  color: #fff;
-  font-family: "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  /* Prevent content from overflowing horizontally */
-  overflow-x: hidden;
-}
-
-/* Container that uses flex to position items at the top */
+/* 3. Container */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Items start near the top */
+  justify-content: flex-start;
   height: 100%;
-  width: 100%;
+  padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto; /* Scroll if content is taller than the window */
-  padding: 20px;
+  overflow-y: auto;
 }
 
-/* Multiline title styling */
+/* 4. Title textarea */
 .title-textarea {
-  width: 90%;                /* Title can span up to 90% of the container width */
-  max-width: 90%;            /* Prevents overflow horizontally */
-  font-size: calc(1.5vw + 1rem);
-  background: transparent;
-  border: none;
-  color: #fff;
-  text-align: center;
-  resize: none;              /* We'll auto-resize via JS */
-  overflow: hidden;          /* Hide internal scrollbar */
-  margin-bottom: 20px;
-  line-height: 1.2;
-  white-space: pre-wrap;     /* Wrap lines */
-  word-wrap: break-word;     /* Break long words if needed */
-  outline: none;             /* Remove focus outline */
-}
-
-/* Translucent clock box */
-.clock-box {
-  background: rgba(128, 128, 128, 0.5);
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  width: 90%;
-  max-width: 600px; /* Optionally limit the max width of the clock box */
-  text-align: center;
-}
-
-/* Timer display (monospaced to avoid jitter) */
-#timer {
-  font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
-  font-size: calc(5vw + 2rem);
-  font-weight: 900;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Laps display */
-#laps {
-  font-size: calc(1.5vw + 1rem);
   width: 90%;
   max-width: 800px;
+  background: transparent;
+  border: none;
+  color: var(--fg);
+  font-size: calc(1.5vw + 1rem);
   text-align: center;
+  resize: none;
+  overflow: hidden;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  outline: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom var(--transition);
+}
+.title-textarea:focus {
+  border-bottom-color: var(--accent);
 }
 
-/* Lap color coding */
+/* 5. Clock box */
+.clock-box {
+  background: var(--box-bg);
+  padding: 20px 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  margin: 20px 0;
+  transition: background var(--transition);
+}
+.clock-box:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* 6. Timer display */
+#timer {
+  font-family: var(--font-mono);
+  font-size: calc(5vw + 2rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+  transition: transform var(--transition);
+}
+#timer.scaled {
+  transform: scale(1.05);
+}
+
+/* 7. Laps container and entries */
+#laps {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: calc(1.5vw + 1rem);
+}
+.lap-entry {
+  display: inline-block;
+  opacity: 0;
+  animation: fadeIn 0.4s forwards;
+  margin: 4px 0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: var(--box-bg);
+  transition: background var(--transition);
+}
+.lap-entry:hover {
+  background: rgba(255,255,255,0.1);
+}
 .fast-lap {
-  color: limegreen;
+  color: var(--fast-color) !important;
 }
 .slow-lap {
-  color: red;
+  color: var(--slow-color) !important;
 }
 
-/* Responsive adjustments for very small screens */
+/* 8. Stats panel */
+#stats {
+  width: 90%;
+  max-width: 600px;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+  font-size: calc(1.5vw + 1rem);
+}
+#stats p {
+  margin: 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: var(--box-bg);
+  transition: background var(--transition);
+}
+#stats p:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* 9. Chart */
+#lapChart {
+  width: 90%;
+  max-width: 600px;
+  margin-top: 20px;
+}
+
+/* 10. Keyframes */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* 11. Responsive adjustments */
 @media (max-width: 600px) {
   #timer {
     font-size: calc(8vw + 2rem);
   }
-  #laps {
+  .title-textarea {
     font-size: calc(2vw + 1rem);
   }
-  .title-textarea {
+  #laps, #stats {
     font-size: calc(2vw + 1rem);
   }
 }
