@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preferences</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    label, input, button {
+      display: block;
+      margin: 10px auto;
+      font-size: 16px;
+    }
+    input {
+      padding: 5px;
+      width: 80%;
+    }
+    button {
+      padding: 10px 20px;
+      background: limegreen;
+      border: none;
+      color: #000;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>Preferences</h2>
+  <label>
+    Title:
+    <input type="text" id="prefTitle" placeholder="Enter session title">
+  </label>
+  <button id="savePref">Save</button>
+  <script src="preferences.js"></script>
+</body>
+</html>

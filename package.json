@@ -1,0 +1,30 @@
+{
+  "name": "zombieclock",
+  "version": "1.0.0",
+  "description": "A lap timer for Black Ops 6 zombies speed runs",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^35.0.3",
+    "electron-builder": "^23.6.0"
+  },
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.34"
+  },
+  "build": {
+    "appId": "com.example.zombieclock",
+    "mac": {
+      "target": "dmg"
+    },
+    "directories": {
+      "output": "dist"
+    }
+  }
+}

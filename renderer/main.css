@@ -1,0 +1,96 @@
+/* main.css */
+
+/* Use full window height */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic body styling */
+body {
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Prevent content from overflowing horizontally */
+  overflow-x: hidden;
+}
+
+/* Container that uses flex to position items at the top */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Items start near the top */
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto; /* Scroll if content is taller than the window */
+  padding: 20px;
+}
+
+/* Multiline title styling */
+.title-textarea {
+  width: 90%;                /* Title can span up to 90% of the container width */
+  max-width: 90%;            /* Prevents overflow horizontally */
+  font-size: calc(1.5vw + 1rem);
+  background: transparent;
+  border: none;
+  color: #fff;
+  text-align: center;
+  resize: none;              /* We'll auto-resize via JS */
+  overflow: hidden;          /* Hide internal scrollbar */
+  margin-bottom: 20px;
+  line-height: 1.2;
+  white-space: pre-wrap;     /* Wrap lines */
+  word-wrap: break-word;     /* Break long words if needed */
+  outline: none;             /* Remove focus outline */
+}
+
+/* Translucent clock box */
+.clock-box {
+  background: rgba(128, 128, 128, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 600px; /* Optionally limit the max width of the clock box */
+  text-align: center;
+}
+
+/* Timer display (monospaced to avoid jitter) */
+#timer {
+  font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+  font-size: calc(5vw + 2rem);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Laps display */
+#laps {
+  font-size: calc(1.5vw + 1rem);
+  width: 90%;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* Lap color coding */
+.fast-lap {
+  color: limegreen;
+}
+.slow-lap {
+  color: red;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 600px) {
+  #timer {
+    font-size: calc(8vw + 2rem);
+  }
+  #laps {
+    font-size: calc(2vw + 1rem);
+  }
+  .title-textarea {
+    font-size: calc(2vw + 1rem);
+  }
+}
