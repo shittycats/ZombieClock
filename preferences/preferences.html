@@ -1,41 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Preferences</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #222;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    label, input, button {
-      display: block;
-      margin: 10px auto;
-      font-size: 16px;
-    }
-    input {
-      padding: 5px;
-      width: 80%;
-    }
-    button {
-      padding: 10px 20px;
-      background: limegreen;
-      border: none;
-      color: #000;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" href="preferences.css" />
 </head>
 <body>
   <h2>Preferences</h2>
+
   <label>
-    Title:
-    <input type="text" id="prefTitle" placeholder="Enter session title">
+    Theme:
+    <select id="themeSelect">
+      <option value="light">Light</option>
+      <option value="dark" selected>Dark</option>
+    </select>
   </label>
+
+  <label>
+    Clock Font:
+    <select id="fontSelect">
+      <option value="var(--font-mono)">SF Mono</option>
+      <option value="var(--font-alt)">Courier New</option>
+      <option value="var(--font-default)">System</option>
+    </select>
+  </label>
+
+  <label>
+    Session Title:
+    <input type="text" id="prefTitle" placeholder="Enter session title" />
+  </label>
+
   <button id="savePref">Save</button>
   <script src="preferences.js"></script>
 </body>

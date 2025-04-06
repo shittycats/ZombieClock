@@ -1,18 +1,25 @@
 // preferences/preferences.js
 const { ipcRenderer } = require("electron");
 
-const titleInput = document.getElementById("prefTitle");
-const saveButton = document.getElementById("savePref");
+const themeSelect = document.getElementById("themeSelect");
+const fontSelect  = document.getElementById("fontSelect");
+const titleInput  = document.getElementById("prefTitle");
+const saveBtn     = document.getElementById("savePref");
 
-// Optional: Load current preferences when the window opens.
+// Load existing preferences
 ipcRenderer.send("load-preferences");
-ipcRenderer.on("load-preferences", (event, preferences) => {
-  if (preferences.title) {
-    titleInput.value = preferences.title;
-  }
+ipcRenderer.on("load-preferences", (e, prefs) => {
+  if (prefs.theme) themeSelect.value = prefs.theme;
+  if (prefs.font)  fontSelect.value  = prefs.font;
+  if (prefs.title) titleInput.value  = prefs.title;
 });
 
-saveButton.addEventListener("click", () => {
-  const newTitle = titleInput.value;
-  ipcRenderer.send("save-preferences", { title: newTitle });
+// Save preferences
+saveBtn.addEventListener("click", () => {
+  const newPrefs = {
+    theme: themeSelect.value,
+    font:  fontSelect.value,
+    title: titleInput.value
+  };
+  ipcRenderer.send("save-preferences", newPrefs);
 });
